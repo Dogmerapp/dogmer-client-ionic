@@ -1,0 +1,7 @@
+{
+  "name": "ionic-parse-server",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

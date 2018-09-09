@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Sujet</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only>
+        <ion-icon name='contact'></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name='search'></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-searchbar [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
+  </ion-searchbar>
+
+  <ion-list>
+    <ion-item-divider color="primary-light">
+      Add Sujet
+    </ion-item-divider>
+    <ion-item>
+      <ion-input type="text" placeholder="Name" [(ngModel)]="newSujet.sujetName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Description" [(ngModel)]="newSujet.sujetDescription"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Image URL http://" [(ngModel)]="newSujet.sujetImageURL"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Action" [(ngModel)]="newSujet.sujetAction"></ion-input>
+    </ion-item>
+    <ion-item no-lines>
+      <button ion-button icon-left color="accent" (click)="postSujet()">
+        <ion-icon name="checkmark-circle"></ion-icon>Submit</button>
+    </ion-item>
+
+    <ion-item-divider color="primary-light">
+      Current Sujets
+    </ion-item-divider>
+  </ion-list>
+
+
+  <ion-card *ngFor="let sujet of sujets">
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="http://lorempixel.com/400/200/">
+      </ion-avatar>
+      <h2>{{ sujet.get('sujetName') }}</h2>
+      <p>{{ sujet.get('updateAt') }}</p>
+    </ion-item>
+    <img src="{{ sujet.get('sujetImageURL') }}">
+    <ion-card-content>
+      {{ sujet.get('sujetDescription') }}
+      <p>{{ sujet.get('objectId') }}</p>
+    </ion-card-content>
+
+    <button ion-button color="secondary" round>{{ sujet.get('sujetAction') }}</button>
+    <button ion-button color="primary" round (click)="postButton(sujet)">+ Button</button>
+    
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-start clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>12 Likes</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-start clear small>
+          <ion-icon name="text"></ion-icon>
+          <div>4 Comments</div>
+        </button>
+      </ion-col>
+      <ion-col center text-center>
+        <button ion-button icon-start clear small>
+          <ion-icon name="text"></ion-icon>
+          <div>More...</div>
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+  <ion-infinite-scroll (ionInfinite)="$event.waitFor(listSujets())">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

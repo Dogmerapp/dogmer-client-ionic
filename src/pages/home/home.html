@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Buttons</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list>
+
+    <ion-item-divider color="primary-light">
+      Add Button
+    </ion-item-divider>
+    <ion-item>
+      <ion-input type="text" placeholder="Name" [(ngModel)]="newButton.buttonName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Action" [(ngModel)]="newButton.action"></ion-input>
+    </ion-item>
+    <ion-item no-lines>
+      <button ion-button icon-left color="accent" (click)="postButton()">
+        <ion-icon name="checkmark-circle"></ion-icon>Submit</button>
+    </ion-item>
+
+    <ion-item-divider color="primary-light">
+      Current Orders
+    </ion-item-divider>
+    <ion-item *ngFor="let order of orders">
+      <ion-list>
+        <ion-item>
+          <h1>{{ order.name }}</h1>
+          <p>{{ order.description }}</p>
+          <h3>Status: {{ order.status }}</h3>
+        </ion-item>
+      </ion-list>
+    </ion-item>
+
+
+    <ion-item-divider color="primary-light">
+      Current Butotns
+    </ion-item-divider>
+    <ion-item *ngFor="let button of buttons">
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail item-start>
+            <img src="{{ button.get('buttonImageURL') }}">
+          </ion-thumbnail>
+          <h1>{{ button.get('buttonName') }}</h1>
+          <p>{{ button.get('buttonDescription') }}</p>
+          <button ion-button round item-end icon-start (click)="postOrder(button)">
+            {{ button.get('buttonAction') }}
+          </button>
+        </ion-item>
+      </ion-list>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="$event.waitFor(listButtons())">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

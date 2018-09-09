@@ -1,0 +1,28 @@
+page-about {}
+
+
+.sujets-components-page {
+
+    ion-card {
+      margin-bottom: 2em;
+    }
+  
+    ion-card-content {
+      background-color: #F4F5F8;
+      margin-left: 20px auto;
+      margin-right: 20px auto;
+    }
+  
+    p {
+      margin-left: 20px auto;
+      margin-right: 20px auto;
+    }
+
+    ion-card img {
+      width: auto;
+      height: 44px;
+      display: block;
+      margin: 20px auto;
+    }
+  
+  }
